@@ -1,12 +1,12 @@
-mcmc_bbc <- function(){
+mcmc_bbc <- function(data_mat,
+                     ){
   
-  rm(list=ls(all=TRUE))
+  #rm(list=ls(all=TRUE))
   #memory.limit(size = 56000)
   require(gtools)
   
-  setwd("C:/Users/joaov/Documents/IC/bbcsport")
-  
-  data_mat = read.table("bbcsport.txt")
+  #setwd("C:/Users/joaov/Documents/IC/bbcsport")
+  #data_mat = read.table("bbcsport.txt")
   
   colnames(data_mat) = c("word", "doc", "freq")
   head(data_mat)
@@ -15,7 +15,7 @@ mcmc_bbc <- function(){
   data = data_mat[order(data_mat[,2], decreasing=FALSE), ]
   
   # Number of topics
-  K <- readline(prompt = "Digite o número de tópicos: ")
+  K <- readline(prompt = "Digite o nÃºmero de tÃ³picos: ")
   K <- strtoi(K)
   # Number of words in the vocabulary
   V = max(data_mat[ ,1])
@@ -54,7 +54,7 @@ mcmc_bbc <- function(){
     } 
   }
   
-  n_iter <- readline(prompt = "Digite o número de iterações desejadas: ")
+  n_iter <- readline(prompt = "Digite o nÃºmero de iteraÃ§Ãµes desejadas: ")
   n_iter <- strtoi(n_iter)
   save_it = 100
   
@@ -125,9 +125,9 @@ mcmc_bbc <- function(){
   plot( beta_chain[1,2, ], type = "l" )
   
   mean(beta_chain[1,1,1001:3000])
-  # do 1 até o V, 2 até o V, 3 até o V ...
+  # do 1 atÃ© o V, 2 atÃ© o V, 3 atÃ© o V ...
   #usando o for no beta_chain
-  #comentar o z_chain e a parte da iteração do z chain
+  #comentar o z_chain e a parte da iteraÃ§Ã£o do z chain
   
   beta_chain = mcmc_chain$beta
   beta_chain
