@@ -1,12 +1,12 @@
-mcmc_bbc <- function(){
+mcmc_bbc <- function(data_mat
+                     ){
   
-  rm(list=ls(all=TRUE))
+  #rm(list=ls(all=TRUE))
   #memory.limit(size = 56000)
   require(gtools)
   
-  setwd("C:/Users/joaov/Documents/IC/bbcsport")
-  
-  data_mat = read.table("bbcsport.txt")
+  #setwd("C:/Users/joaov/Documents/IC/bbcsport")
+  #data_mat = read.table("bbcsport.txt")
   
   colnames(data_mat) = c("word", "doc", "freq")
   head(data_mat)
@@ -15,7 +15,7 @@ mcmc_bbc <- function(){
   data = data_mat[order(data_mat[,2], decreasing=FALSE), ]
   
   # Number of topics
-  K <- readline(prompt = "Digite o número de tópicos: ")
+  K <- readline(prompt = "Digite o nÃºmero de tÃ³picos: ")
   K <- strtoi(K)
   # Number of words in the vocabulary
   V = max(data_mat[ ,1])
@@ -34,7 +34,7 @@ mcmc_bbc <- function(){
   alpha = rep(1, K)
   eta = rep(1, V)
   
-  # Inicializing parameters
+  # Initializing parameters
   beta = matrix(1/V, nrow = K, ncol = V)
   theta = matrix(1/K, nrow = D, ncol = K)
   z = rep( list(1), D)
@@ -42,7 +42,7 @@ mcmc_bbc <- function(){
     z[[d]] = sample( x=1:K, size = N[d], replace = TRUE)
   }
   
-  # We create the w list by desagregating the original matrix of 
+  # We create the w list by disagregating the original matrix of 
   # documents. We pretend that repeated words occur in sequence within
   # each document. This only works because we are dealing with a bag of
   # words model so the order in which words appear are irrelevant.
@@ -54,13 +54,13 @@ mcmc_bbc <- function(){
     } 
   }
   
-  n_iter <- readline(prompt = "Digite o número de iterações desejadas: ")
+  n_iter <- readline(prompt = "Digite o nÃºmero de iteraÃ§Ãµes desejadas: ")
   n_iter <- strtoi(n_iter)
   save_it = 100
   
   beta_chain = array(0, dim = c(K, V, n_iter/save_it) )
   theta_chain = array(0, dim = c(D, K, n_iter/save_it) )
-  z_chain = rep(list(0), n_iter/save_it)
+  #z_chain = rep(list(0), n_iter/save_it)
   
   for(iter in 1:n_iter){
     
@@ -102,10 +102,11 @@ mcmc_bbc <- function(){
     }
     
     # saving sampled parameters
-    beta_chain[,, iter/save_it] = beta
-    theta_chain[,, iter/save_it] = theta
-    z_chain[[iter/save_it]] = z  
-    
+    if( iter %% save_it == 0){
+      beta_chain[,, iter%/%save_it ] = beta
+      theta_chain[,, iter%/%save_it] = theta
+      #z_chain[[iter/save_it]] = z  
+    }
     # print current iteration
     print(iter)
     
@@ -115,67 +116,7 @@ mcmc_bbc <- function(){
   mcmc_chain = list( "beta" = beta_chain,
                      "theta" = theta_chain)
   
-  # save
-  save(mcmc_chain, file = "./mcmc_output/mcmc_chain_v4.Rdata")
-  
-  # load mcmc chain
-  load(file = "./mcmc_output/mcmc_chain_v2.Rdata")
-  
-  plot( beta_chain[1,1, ], type = "l" )
-  plot( beta_chain[1,2, ], type = "l" )
-  
-  mean(beta_chain[1,1,1001:3000])
-  # do 1 até o V, 2 até o V, 3 até o V ...
-  #usando o for no beta_chain
-  #comentar o z_chain e a parte da iteração do z chain
-  
-  beta_chain = mcmc_chain$beta
-  beta_chain
-  plot(x = mcmc_chain$beta[1,1,], type = "l")
-  #K = 10
-  #V = 4613
-  beta_matrix = matrix(0,K,V)
-  for (k in 1: K){
-    for (v in 1:V){
-      beta_matrix[k,v] = median(beta_chain[k,v,])
-    }
-  }
-  
-  words <- as.vector(read.table("./bbcsport_terms"))[,1]
-  words <- as.vector(read.table("./bbcsport_terms"))[,1]
-  length(words)
-  words[2]
-  words[1,1]
-  words[2,1]
-  sort_index<- order(beta_matrix[1,],decreasing = TRUE)
-  beta_matrix[1,sort_index]
-  sort_index <- sort_index[1:20]
-  words[sort_index[1:20]]
-  
-  
-  T = 1
-  words <- as.vector(read.table("./bbcsport_terms"))[,1]
-  length(words)
-  topics_matrix = matrix("0",20,10)
-  while (T<= K) {
-    sort_index <- order(beta_matrix[T,], decreasing = TRUE)
-    beta_matrix[T,sort_index]
-    sort_index <- sort_index[1:20]
-    topics_matrix[,T] <- words[sort_index[1:20]]
-    T = T+1
-  }
-  dim(theta_chain)
-  theta_chain = mcmc_chain$theta
-  plot(x = theta_chain[1,1,], type = "l")
-  #D = 737
-  #K = 5
-  
-  
-  theta_matrix <- apply(X = theta_chain, MARGIN = c(1,2), FUN = median)
-  head(theta_matrix)
-  theta_matrix[100:105,]
-  #MARGIN = 1 lines
-  #MARGIN = 2 column
-  apply(X = theta_matrix, FUN = which.max, MARGIN = 1)
+  # returns mcmc chain
+  return(mcmc_chain)
   
 }
