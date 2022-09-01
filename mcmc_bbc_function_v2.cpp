@@ -44,7 +44,7 @@ double sumC_correto ( NumericVector x ) {
   double soma = x [0];
   int n = x . size () ;
   int i =1;
-  while (i < n ) {
+  while (i < n ) { 
     soma = soma + x [i];
     i = i +1;
   }
@@ -71,7 +71,58 @@ Rcpp::List mcmc_bbc_cpp( arma::mat data,
     //N[d] = sum( data.col(2).elem(lines_document_d) );
     N[d-1] = sum( data.col(2) );
   }
+
+  // Inicializing hyperparameters
+  NumericVector alpha(K);
+  NumericVector eta(V);
+
+  for (int i = 0; i <= K; i++)
+  {
+    alpha[i] = 1;
+    eta[i] = 1;
+  }
+  
+  // Inicializing parameters
+  NumericMatrix beta(K,V);
+
+  for (int i = 0; i < K; i++)
+  {
+    for (int j = 0; j < V; j++)
+    {
+      beta[i][j] = 1.0/V;
+    }
+  }
+  
+  for (int i = 0; i < count; i++)
+  {
+    for (int j = 0; j < count; j++)
+    {
+      theta[i][j] = 1.0/K;
+    }
     
+  }
+
+  NumericVector z(D)
+
+  for (int i = 0; i < D; i++)
+  {
+    z[i] = list(1);
+  }
+
+  for (int d = 0; d < D; d++)
+  {
+    // dúvida //
+  }
+  
+  NumericVector w(D)
+
+  for (int i = 0; i < D; i++)
+  {
+    w[i] = List::create(list(1))
+  }
+  // dúvida //
+  
+
   int beta_chain = 0;
   int theta_chain = 0;
   
