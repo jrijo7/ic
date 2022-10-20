@@ -3,7 +3,7 @@ rm(list=ls(all=TRUE))
 #memory.limit(size = 56000)
 require(gtools)
 
-setwd("/home/tadeu/UFRJ/Orientacoes_IC/Joao/ic-main")
+setwd("C:/Users/joaov/Documents/IC")
 
 data_mat = read.table("./bbc_sport/bbcsport.txt")
 
@@ -12,13 +12,17 @@ colnames(data_mat) = c("word", "doc", "freq")
 data = data_mat[order(data_mat[,2], decreasing=FALSE), ]
 
 # load mcmc chain
-load(file = "./bbc_sport/mcmc_output/mcmc_chain_K_5.Rdata")
+load(file = "./bbc_sport/mcmc_output/mcmc_chain.Rdata")
 
 # extracts marginal chains
-beta_chain = mcmc_chain$beta
+beta_chain = chain$beta
 
 plot( beta_chain[1,1, ], type = "l" )
 plot( beta_chain[1,2, ], type = "l" )
+plot( beta_chain[1,3, ], type = "l" )
+hist(beta_chain[1,3,1:250], freq = FALSE, xlim = c(0,0.002))
+hist(beta_chain[1,3,251:500], freq = FALSE, xlim = c(0,0.002))
+plot( beta_chain[1,4, ], type = "l" )
 
 mcmc_ind = 11:500
 

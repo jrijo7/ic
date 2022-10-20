@@ -5,32 +5,24 @@ require(gtools)
 
 setwd("C:/Users/joaov/Documents/IC/bbcsport")
 
-#reading the database
 data_mat = read.table("bbcsport.txt")
 
-#naming the columns
 colnames(data_mat) = c("word", "doc", "freq")
-#database header
 head(data_mat)
-#description
 str(data_mat)
 
-# sorting based on the value of documents
 data = data_mat[order(data_mat[,2], decreasing=FALSE), ]
 
 # Number of topics
-# In this specific document there are 5 topics
-K = 5
+K = 10
 # Number of words in the vocabulary
 V = max(data_mat[ ,1])
 # number of documents
 D = max(data_mat[, 2])
 # number of words in document d
-# the zeros will be replaced by the number of words in each document
 N = rep(0, D)
 
 # defining N[d]
-# is the total number of words in each document
 for ( d in 1:D ){
   lines_document_d = which(data_mat$doc == d)
   N[d] = sum( data_mat[lines_document_d, 3] )
@@ -129,9 +121,9 @@ plot( beta_chain[1,1, ], type = "l" )
 plot( beta_chain[1,2, ], type = "l" )
 
 mean(beta_chain[1,1,1001:3000])
-# do 1 atï¿½ o V, 2 atï¿½ o V, 3 atï¿½ o V ...
+# do 1 até o V, 2 até o V, 3 até o V ...
 #usando o for no beta_chain
-#comentar o z_chain e a parte da iteraï¿½ï¿½o do z chain
+#comentar o z_chain e a parte da iteração do z chain
 
 beta_chain = mcmc_chain$beta
 beta_chain
