@@ -54,10 +54,20 @@ Rcpp::List mcmc_cpp( arma::mat data,
                          int n_iter = 100000,
                          int save_it = 100){
   
-  // O objeto data deve ser uma matriz com três colunas palavra, documento e frequência
-  // nesta ordem, a coluna de documentos deve estar ordenada de forma não decrescente,
-  // ou seja, primeiro deve constar as palavras do documento 1, depois do 2 e assim por
-  // diante.
+  // Args:
+  //
+  // data: columns must be 
+  //       1. Word 
+  //       2. document
+  //       3. frequency
+  //       The documents column (2) must be in ascending order, 
+  //       first with word from doc 1, then from doc 2 so on.
+  //
+  // w: list of size D (number of documents), each enty being
+  //    a bag of words vector in the format 
+  //    [word1, word1, word1, word7, word7, word9, ... ]
+  //
+  // K: number of topics
   
   // Number of words in vocabulary
   int V = data.col(0).max();
