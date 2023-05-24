@@ -15,7 +15,7 @@ str(data_mat)
 
 data_mat = data_mat[,c(2,1,3)]
 
-data_mat = data_mat[-1,]
+# data_mat = data_mat[-1,] <-------- NAO DELETE A PRIMEIRA LINHA. ELA PODE PERMANECER SEM PROBLEMAS
 data = data_mat[order(data_mat[,2], decreasing=FALSE), ]
 
 setwd("C:/Users/joaov/Documents/IC/codes")
