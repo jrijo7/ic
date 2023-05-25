@@ -21,18 +21,8 @@ colnames(data_mat) = c("doc", "word", "freq")
 data_mat = data_mat[-1,]
 data = data_mat[order(data_mat[,2], decreasing=FALSE), ]
 
-transform <- function(data_mat
-){
-  D = max(data_mat[, 2])
-  w = rep( list(NULL), D)
-  for (d in 1:D){
-    doc_d = data_mat[which(data_mat$doc == d), c(1,3)]
-    for (i in 1:nrow(doc_d) ){
-      w[[d]] = c(w[[d]], rep( doc_d$word[i] - 1, doc_d$freq[i]) )
-    } 
-  }
-  return(w)
-}
+# LEIA DO ARQUIVO utils.R ao invés de copiar pra cá o texto da função
+source("./codes/utils.R")
 
 w = transform(data)
 d = 1
