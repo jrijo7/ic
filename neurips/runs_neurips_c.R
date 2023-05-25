@@ -4,8 +4,8 @@ require(gtools)
 require(Rcpp)
 require(RcppArmadillo)
 
+# set working directory to the location of the main github folder in local machine
 setwd("C:/Users/joaov/Documents/IC")
-
 
 data_mat = read.table("./neurips/data/docword_nips.txt", skip = 3)
 
@@ -18,7 +18,7 @@ data_mat = data_mat[,c(2,1,3)]
 data_mat = data_mat[-1,]
 data = data_mat[order(data_mat[,2], decreasing=FALSE), ]
 
-setwd("C:/Users/joaov/Documents/IC/codes")
+setwd("./codes")
 
 source("utils.R")
 

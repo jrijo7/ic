@@ -11,3 +11,55 @@ transform <- function(data_mat
   }
   return(w)
 }
+
+
+DIC_LDA = function(data_mat, chain, mcmc_ind){
+    
+  # extracts marginal chains
+  beta_chain = chain$beta
+  chain$beta = 0
+  theta_chain = chain$theta
+  chain$theta = 0
+  
+  w = transform(data)
+  M = length(mcmc_ind)
+  D = max(data_mat$doc)
+  
+  for (d in 1:D){
+    w[[d]] = w[[d]] + 1
+  }
+  
+  print("Calculating mean D(theta) ...")
+  
+  mean_D_theta = 0
+  for (m in mcmc_ind){
+    print(m)
+    for (d in 1:D){
+      Nd = length(w[[d]])
+      for( n in 1:Nd){
+        mean_D_theta = mean_D_theta + log(beta_chain[,w[[d]][n],m] %*% theta_chain[d,,m])
+      }
+    }
+  }
+  mean_D_theta = -2*mean_D_theta/M
+  
+  beta_barra = apply(X = beta_chain,FUN = mean, MARGIN = c(1,2))
+  theta_barra = apply(X = theta_chain,FUN = mean, MARGIN = c(1,2))
+  
+  print("Calculating D( mean(theta) ) ...")
+  D_theta_mean = 0
+  for (d in 1:D){
+    Nd = length(w[[d]])
+    for (n in 1:Nd){
+      D_theta_mean = D_theta_mean + log(beta_barra[,w[[d]][n]]%*%theta_barra[d,])
+    }
+  }
+  D_theta_mean = -2 * D_theta_mean
+  
+  p_D = mean_D_theta - D_theta_mean
+  
+  DIC = p_D + mean_D_theta
+  
+  print("Done.")
+  return( DIC )
+}
