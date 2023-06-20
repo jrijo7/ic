@@ -30,7 +30,7 @@ w = transform(data)
 
 # for k = 10 is done
 # for k = 15 is in done
-# for k = 20 is in fault
+# for k = 20 is in done
 
 # comparar tempo computacional com o pacote lda
 
@@ -60,4 +60,4 @@ min(data[,1])
 
 chain = mcmc_cpp( data = as.matrix(data), w = w , K = 20, n_iter = 15000, save_it = 10)
 
-save(chain, file = "C:/Users/joaov/Documents/IC/neurips/mcmc_output/mcmc_chain_20.Rdata")
+save(chain, file = "C:/Users/joaov/Documents/IC/neurips/mcmc_output/mcmc_chain_10.Rdata")
