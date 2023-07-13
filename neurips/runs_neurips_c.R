@@ -4,8 +4,8 @@ require(gtools)
 require(Rcpp)
 require(RcppArmadillo)
 
+# set working directory to the location of the main github folder in local machine
 setwd("C:/Users/joaov/Documents/IC")
-
 
 data_mat = read.table("./neurips/data/docword_nips.txt", skip = 3)
 
@@ -15,10 +15,10 @@ str(data_mat)
 
 data_mat = data_mat[,c(2,1,3)]
 
-data_mat = data_mat[-1,]
+# data_mat = data_mat[-1,] <-------- NAO DELETE A PRIMEIRA LINHA. ELA PODE PERMANECER SEM PROBLEMAS
 data = data_mat[order(data_mat[,2], decreasing=FALSE), ]
 
-setwd("C:/Users/joaov/Documents/IC/codes")
+setwd("./codes")
 
 source("utils.R")
 
@@ -30,7 +30,7 @@ w = transform(data)
 
 # for k = 10 is done
 # for k = 15 is in done
-# for k = 20 is in fault
+# for k = 20 is in done
 
 # comparar tempo computacional com o pacote lda
 
@@ -60,4 +60,4 @@ min(data[,1])
 
 chain = mcmc_cpp( data = as.matrix(data), w = w , K = 20, n_iter = 15000, save_it = 10)
 
-save(chain, file = "C:/Users/joaov/Documents/IC/neurips/mcmc_output/mcmc_chain_20.Rdata")
+save(chain, file = "C:/Users/joaov/Documents/IC/neurips/mcmc_output/mcmc_chain_10.Rdata")

@@ -2,29 +2,36 @@
 rm(list=ls(all=TRUE))
 #memory.limit(size = 56000)
 require(gtools)
+require(Rcpp)
+require(RcppArmadillo)
 
 setwd("C:/Users/joaov/Documents/IC")
 
-data_mat = read.table("./bbcsport/data/bbcsport.txt")
+data_mat = read.table("./neurips/data/docword_nips.txt", skip = 3)
 
+head(data_mat[,c(2,1,3)])
+str(data_mat)
+
+data_mat = data_mat[,c(2,1,3)]
 colnames(data_mat) = c("word", "doc", "freq")
 
+data_mat = data_mat[-1,]
 data = data_mat[order(data_mat[,2], decreasing=FALSE), ]
+data_mat = as.matrix(data_mat)
 
 # Defining variables
-K = 5
-D = max(data_mat$doc)
-V = max(data_mat$word)
+K = 15
+D = max(data_mat[,"doc"])
+V = max(data_mat[,"word"])
 
 # load mcmc chain
-load(file = "./bbcsport/mcmc_output/mcmc_chain.Rdata")
+load(file = paste0("./neurips/mcmc_output/mcmc_chain_",toString(K),".Rdata"))
 
 # extracts marginal chains
 beta_chain = chain$beta
 chain$beta = 0
 theta_chain = chain$theta
 chain$theta = 0
-rm(chain)
 mcmc_ind = 500:2000
 
 
@@ -68,7 +75,6 @@ mean(beta_chain[1,1,mcmc_ind])
 #usando o for no beta_chain
 #comentar o z_chain e a parte da itera??o do z chain
 
-
 beta_matrix = matrix(0,K,V)
 for (k in 1: K){
   for (v in 1:V){
@@ -76,7 +82,7 @@ for (k in 1: K){
   }
 }
 
-words <- as.matrix(read.table("./bbcsport/data/bbcsport.terms"))[,1]
+words <- as.matrix(read.table("C:/Users/joaov/Documents/IC/neurips/data/nips_vocab.txt"))[,1]
 
 #### teste
 
@@ -91,13 +97,31 @@ T = 1
 topics_matrix = matrix("0",10,K)
 while (T<= K) {
   sort_index <- order(beta_matrix[T,], decreasing = TRUE)
-  sort_index <- sort_index[1:10]
+  sort_index <- sort_index[1:K]
   topics_matrix[,T] <- words[sort_index]
   T = T+1
 }
 topics_matrix
 
-dim(theta_chain)
+###
+
+source("./codes/utils.R")
+
+sourceCpp("./codes/dic_c.cpp")
+
+data_mat_df = as.data.frame(data_mat)
+
+w = transform(data_mat_df)
+
+mcmc_ind = seq(1001,2000, by = 10)
+
+DIC = DIC_LDA_C(data_mat = data_mat,
+          beta_chain = beta_chain[,,mcmc_ind],
+          theta_chain = theta_chain[,,mcmc_ind],
+          w = w)
+write.table(DIC, file = paste0("./neurips/mcmc_output/dic_c_",toString(K),".txt"))
+
+'dim(theta_chain)
 
 theta_matrix = matrix(0,D,K)
 for (d in 1: D){
@@ -126,4 +150,4 @@ abline(v = 225)
 abline(v = 490)
 abline(v = 637)
 abline(v = 737)
-abline(v = 0)
+abline(v = 0)'

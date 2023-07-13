@@ -51,8 +51,23 @@ arma::rowvec rdirichlet(arma::rowvec alpha){
 Rcpp::List mcmc_cpp( arma::mat data,
                          Rcpp::List w,
                          int K,
-                         int n_iter = 50000,
+                         int n_iter = 100000,
                          int save_it = 100){
+  
+  // Args:
+  //
+  // data: columns must be 
+  //       1. Word 
+  //       2. document
+  //       3. frequency
+  //       The documents column (2) must be in ascending order, 
+  //       first with word from doc 1, then from doc 2 so on.
+  //
+  // w: list of size D (number of documents), each enty being
+  //    a bag of words vector in the format 
+  //    [word1, word1, word1, word7, word7, word9, ... ]
+  //
+  // K: number of topics
   
   // Number of words in vocabulary
   int V = data.col(0).max();
@@ -199,26 +214,3 @@ Rcpp::List mcmc_cpp( arma::mat data,
 // (useful for testing and development). The R code will be automatically 
 // run after the compilation.
 //
-
-/*** R
-
-# require(gtools)
-# 
-# setwd("C:/Users/joaov/Documents/IC/bbcsport")
-# 
-# data_mat = read.table("./bbcsport.txt")
-# 
-# colnames(data_mat) = c("word", "doc", "freq")
-# head(data_mat)
-# str(data_mat)
-# 
-# data_mat = data_mat[-1,]
-# 
-# dataset = data_mat[order(data_mat[,2], decreasing=FALSE), ]
-# 
-# source("utils.R")
-# 
-# w = transform(dataset)
-# 
-# chain = mcmc_bbc_cpp( data = as.matrix(dataset), w , K = 5 )
-*/
