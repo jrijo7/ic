@@ -10,5 +10,4 @@ k20>k15>k10
 
 No RCPP:
 
-k = 15
-DIC = 28633644 
+temos arquvivos separados para isso
