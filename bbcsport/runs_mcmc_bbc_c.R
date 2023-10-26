@@ -21,7 +21,7 @@ source("utils.R")
 
 sourceCpp("./mcmc_function.cpp")
 
-source("./mcmc_bbc_function.R")
+source("./mcmc_function.R")
 
 w = transform(data)
 
