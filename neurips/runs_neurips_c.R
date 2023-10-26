@@ -53,7 +53,7 @@ for(d in 1:D){
 
 nips_vocab <- read.table("../neurips/data/nips_vocab.txt")[,1]
 
-lda.collapsed.gibbs.sampler(documents = data_lda, K = 10, vocab = nips_vocab, num.iterations = 10,
+mcmc_function(documents = data_lda, K = 10, vocab = nips_vocab, num.iterations = 10,
                             alpha = 1, eta = 1)
 min(data[,1])
 
