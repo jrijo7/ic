@@ -9,18 +9,6 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 
-// This is a simple example of exporting a C++ function to R. You can
-// source this function into an R session using the Rcpp::sourceCpp 
-// function (or via the Source button on the editor toolbar). Learn
-// more about Rcpp at:
-//
-//   http://www.rcpp.org/
-//   http://adv-r.had.co.nz/Rcpp.html
-//   http://gallery.rcpp.org/
-//
-
-
-
 // [[Rcpp::export]]
 uvec arma_sample(int n, vec prob){
   int k = prob.n_elem;
@@ -35,7 +23,6 @@ uvec arma_sample(int n, vec prob){
 
 
 // [[Rcpp::export]]
-
 arma::rowvec rdirichlet(arma::rowvec alpha){
   int k = alpha.n_elem;
   arma::rowvec y(k);
@@ -138,11 +125,7 @@ Rcpp::List mcmc_cpp( arma::mat data,
   
   
   arma::cube beta_chain(K, V, n_iter/save_it);
-  
   arma::cube theta_chain(D, K, n_iter/save_it);
-  
-  
-  
   
   arma::mat beta_dirichlet(K,V,fill::ones);
   
@@ -209,8 +192,3 @@ Rcpp::List mcmc_cpp( arma::mat data,
   return lista;
 
 }
-  
-// You can include R code blocks in C++ files processed with sourceCpp
-// (useful for testing and development). The R code will be automatically 
-// run after the compilation.
-//
