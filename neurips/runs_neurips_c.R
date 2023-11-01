@@ -43,4 +43,4 @@ nips_vocab <- read.table("../neurips/data/nips_vocab.txt")[,1]
 
 chain = mcmc_cpp( data = as.matrix(data), w = w, K = 20, n_iter = 15000, save_it = 10)
 
-save(chain, file = "./neurips/mcmc_chain_10.Rdata")
+save(chain, file = "./neurips/mcmc_chain_20.Rdata")
