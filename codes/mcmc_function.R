@@ -78,7 +78,6 @@ mcmc_lda = function(data_mat, n_iter = 10, save_it = 10, K = 5
           p_zdn[k] = beta[k, w[[d]][n] ] * theta[d, k]
         }
         p_zdn = p_zdn/sum(p_zdn)
-        #DEU ERRO NO SAMPLE
         z[[d]][n] = sample(x=1:K, size = 1, prob = p_zdn)
       }
     }
