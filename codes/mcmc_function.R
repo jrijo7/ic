@@ -2,7 +2,7 @@ mcmc_lda = function(data_mat, n_iter = 10, save_it = 10, K = 5
                      ){
   require(gtools)
   
-    # Number of words in the vocabulary
+  # Number of words in the vocabulary
   V = max(data_mat[ ,1])
   # number of documents
   D = max(data_mat[, 2])
