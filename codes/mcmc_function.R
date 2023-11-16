@@ -1,4 +1,4 @@
-mcmc_lda <- function(data_mat, n_iter = 10, save_it = 10, K = 5
+mcmc_lda = function(data_mat, n_iter = 10, save_it = 10, K = 5
                      ){
   require(gtools)
   
