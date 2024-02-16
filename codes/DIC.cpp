@@ -11,7 +11,7 @@ using namespace std;
 
 // Function to calculate DIC for LDA model
 // [[Rcpp::export]]
-double DIC_LDA_C(arma::mat data_mat, arma::cube beta_chain, arma::cube theta_chain, List w) {
+double DIC_LDA(arma::mat data_mat, arma::cube beta_chain, arma::cube theta_chain, List w) {
   
   int M = theta_chain.n_slices;
   int D = max(data_mat.col(1));
