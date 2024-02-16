@@ -21,7 +21,7 @@ DIC_LDA = function(data_mat, chain, mcmc_ind, output_file = FALSE){
   theta_chain = chain$theta
   #chain$theta = 0
   
-  w = transform(data)
+  w = transform(data_mat)
   M = length(mcmc_ind)
   D = max(data_mat[,"doc"])
   
