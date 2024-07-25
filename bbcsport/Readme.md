@@ -1,20 +1,18 @@
-BBCSports Times:
+## BBCSports Times
 
-Using RCPP:
+### Using RCPP:
+- **Number of topics (K):** 5
+- **Number of iterations (n_iter):** 150
+- **Save interval (save_it):** 5
+- **Time taken:** 7.189922 seconds
 
-K = 5
-n_iter = 150
-save_it = 5
-Time = 7.189922 secs
+### Using R:
+- **Number of topics (K):** 5
+- **Number of iterations (n_iter):** 150
+- **Save interval (save_it):** 5
+- **Time taken:** 4.612506 minutes
 
-Using R:
-
-K = 5
-n_iter = 150
-save_it = 5
-Time = 4.612506 mins
-
-Topics Results:
+## Topics Results
 
 |      | Tópico 1: Rugby | Tópico 2: Cricket | Tópico 3: American Football | Tópico 4: Soccer | Tópico 5: Tennis |
 |------|------------------|-------------------|----------------------------|------------------|------------------|
