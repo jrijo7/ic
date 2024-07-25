@@ -1,28 +1,39 @@
-RCPP
+Neurips Times:
+
+MCMC
+
+Using RCPP:
 
 K = 10
-n_iter = 10
+n_iter = 150
 save_it = 5
-Time = 28.25148s
-
-n_iter = 1
-Time = 2.825148s
+Time = 3,1811599 mins
 
 K = 15
-n_iter = 10
+n_iter = 150
 save_it = 5
-Time = 29.53584s
-
-n_iter = 1
-Time = 2.953584s
+Time = 4,210568 mins
 
 K = 20
-n_iter = 10
+n_iter = 150
 save_it = 5
-Time = 55.8322s
+Time = 12.37063 mins
 
-n_iter = 1
-Time = 5.58322s
+CAVI:
+
+K = 10
+n_iter = 150+-
+Time = 6.571822 s
+
+K = 15
+n_iter = 150+-
+Time = 10.02719 s
+
+K = 20
+n_iter = 150+-
+Time = 11.33301 s
+
+Topics Results by MCMC:
 
 K = 15
 
