@@ -29,4 +29,4 @@
 
 ## Matriz de palavras por tópicos
 
-![bbcsport_rplot](https://github.com/jrijo7/ic/edit/main/bbcsport/Rplot.png)
+![bbcsport_rplot](https://github.com/jrijo7/ic/blob/main/bbcsport/Rplot.png)
