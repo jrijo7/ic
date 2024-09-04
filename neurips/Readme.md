@@ -146,7 +146,7 @@
 | field                | unit               | neural          | connection       | correlation    | behavior         | data             | trained          | representation   | result             | vector              | learning        | bit                | function             | control             | dynamic             | dimension           | solution            | model               | output               |
 | set                  | solution           | point           | number           | rate           | response         | generalization   | unit             | target           | problem            | method              | problem         | data               | neural               | performance         | set                 | net                 | number              | layer               | filter               |
 
-## Using CAVI
+## CAVI
 
 ### K = 10
 
