@@ -148,6 +148,37 @@
 
 ## Using CAVI
 
+### K = 10
+
+|   [,1]       |   [,2]       |   [,3]          |   [,4]              |   [,5]           |   [,6]       |   [,7]         |   [,8]        |   [,9]        |   [,10]    |
+|:-------------|:-------------|:----------------|:--------------------|:-----------------|:-------------|:---------------|:--------------|:--------------|:-----------|
+| neuron       | algorithm    | parameter       | image               | function         | neural       | result         | model         | model         | error      |
+| system       | network      | problem         | information         | learning         | network      | input          | cell          | likelihood    | data       |
+| input        | learning     | set             | images              | unit             | data         | function       | circuit       | point         | network    |
+| visual       | function     | method          | field               | action           | output       | training       | response      | bayesian      | learning   |
+| control      | space        | weight          | object              | system           | set          | matrix         | stimulus      | mean          | number     |
+| spike        | neural       | distribution    | representation      | policy           | number       | set            | channel       | data          | vector     |
+| effect       | system       | probability     | pattern             | reinforcement    | noise        | kernel         | spatial       | system        | weight     |
+| neural       | set          | input           | map                 | step             | point        | classifier     | pattern       | markov        | task       |
+| synaptic     | point        | examples        | result              | set              | system       | recognition    | temporal      | signal        | training   |
+| current      | training     | term            | linear              | reward           | rate         | vector         | direction     | function      | test       |
+
+#### Feito o pós-processamento penalizando as palavras que aparecem muito em todos os tópicos
+
+|   [,1]       |   [,2]         |   [,3]          |   [,4]           |   [,5]            |   [,6]        |   [,7]         |   [,8]          |   [,9]          |   [,10]     |
+|:-------------|:---------------|:----------------|:-----------------|:------------------|:--------------|:---------------|:----------------|:----------------|:------------|
+| neuron       | algorithm      | parameter       | image            | action            | neural        | result         | model           | model           | error       |
+| spike        | network        | problem         | images           | function          | adaboost      | kernel         | cell            | likelihood      | learning    |
+| ica          | learning       | examples        | svm              | learning          | network       | function       | stimulus        | bayesian        | data        |
+| visual       | function       | bound           | belief           | reward            | number        | matrix         | spatial         | markov          | task        |
+| control      | space          | weight          | object           | unit              | student       | classifier     | channel         | point           | number      |
+| effect       | search         | probability     | latent           | reinforcement     | boosting      | feature        | circuit         | mean            | network     |
+| system       | error          | distribution    | field            | policy            | factor        | recognition    | cortical        | conditional     | vector      |
+| cortex       | estimation     | method          | information      | step              | output        | input          | response        | hmm             | weight      |
+| synaptic     | case           | posterior       | representation   | policies          | rate          | regression     | temporal        | graph           | mixture     |
+| chip         | cost           | set             | face             | sutton            | bound         | training       | orientation     | signal          | pomdp       |
+
+
 ### K = 15
 
 |   [,1]       |   [,2]       |   [,3]         |   [,4]      |   [,5]      |   [,6]            |   [,7]         |   [,8]         |   [,9]       |   [,10]           |   [,11]    |   [,12]        |   [,13]         |   [,14]       |   [,15]         |
